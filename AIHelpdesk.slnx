@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AIHelpdesk.API/AIHelpdesk.API.csproj" />
+  <Project Path="AIHelpdesk.Tests/AIHelpdesk.Tests.csproj" Id="ea196ef9-2366-4392-92ef-c5f784f793fe" />
+</Solution>
