@@ -8,7 +8,6 @@ namespace AIHelpdesk.API.Interfaces
         Task<List<Ticket>> GetTicketsAsync();
         Task<Ticket> CreateTicketAsync(CreateTicketRequest request);
         Task<Ticket?> GetTicketByIdAsync(int id);
-
         Task<Ticket?> UpdateTicketAsync(int id, UpdateTicketRequest request);
         Task<bool> DeleteTicketAsync(int id);
     }
