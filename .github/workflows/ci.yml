@@ -9,7 +9,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-     steps:
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -27,7 +27,7 @@ jobs:
       - name: Run tests
         run: dotnet test --no-build --no-restore
 
-
+        
 #         | YAML             | Purpose                                   |
 # | ---------------- | ----------------------------------------- |
 # | `name`           | Workflow name shown in GitHub Actions     |
