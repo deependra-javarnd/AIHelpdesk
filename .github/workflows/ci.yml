@@ -25,7 +25,14 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Run tests
-        run: dotnet test --no-build --no-restore
+        run: dotnet test --no-build --no-restore --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: "**/test-results.trx"
 
         
 #         | YAML             | Purpose                                   |
