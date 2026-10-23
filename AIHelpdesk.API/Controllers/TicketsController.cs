@@ -1,6 +1,7 @@
-﻿using AIHelpdesk.API.Interfaces;
+﻿using AIHelpdesk.API.DTOs;
+using AIHelpdesk.API.Interfaces;
 using AIHelpdesk.API.Models;
-using AIHelpdesk.API.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,7 @@ namespace AIHelpdesk.API.Controllers
         //    throw new Exception("This is a test exception.");
         //}
         //After you've verified it, delete the temporary TestError() endpoint. Then we'll learn the different logging levels: LogInformation, LogWarning, LogError, and LogDebug.
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetTickets()
         {
@@ -59,6 +61,7 @@ namespace AIHelpdesk.API.Controllers
 
             return Ok(updatedTicket);
         }
+        [Authorize(Roles = "Admin,Agent")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicketAsync(int id)
         {
@@ -68,6 +71,13 @@ namespace AIHelpdesk.API.Controllers
                 return NotFound();
 
             return NoContent();
+        }
+
+        [HttpGet("TestGlobalExceptionHandler")]
+       public void CheckGlobalHandler(string inputValue)
+        {
+            //return Convert.ToInt16(inputValue);
+            throw new InvalidOperationException("New Coustom Global exception Occoured.");
         }
     }
 }

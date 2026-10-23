@@ -202,3 +202,46 @@ Azure
 
 Deploy API
 
+========Authentication/JWT → RBAC==========
+
+
+POST /api/auth/login
+        │
+        ▼
+Username + Password
+        │
+        ▼
+Find User in SQL
+        │
+        ▼
+Verify BCrypt Password
+        │
+   ┌────┴─────┐
+   │          │
+Invalid      Valid
+   │          │
+  401         ▼
+         Get User Role
+              │
+              ▼
+         Generate JWT
+              │
+              ▼
+         Return Token
+
+401 = Authentication failure
+
+"I don't know who you are."
+
+403 = Authorization failure
+
+"I know who you are, but you aren't allowed to do this."
+
+| Situation                | Response             |
+| ------------------------ | -------------------- |
+| No JWT                   | **401 Unauthorized** (authentication failed here) |
+| Invalid/expired JWT      | **401 Unauthorized** (authentication failed here)|
+| Valid JWT + allowed role | **200/201/etc.**     (authentication and autherization both success here)|
+| Valid JWT + wrong role   | **403 Forbidden**    (autherization failed here)|
+
+
